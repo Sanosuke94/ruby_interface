@@ -23,6 +23,7 @@ class WindowApp < Gtk::Window
 	def form
 		@login_entry = Gtk::Entry.new
 		@password_entry = Gtk::Entry.new
+		@password_entry.visibility = false
 		
 		submit_button = Gtk::Button.new(:label => "Submit")
 		submit_button.set_size_request 120, 30
@@ -51,6 +52,7 @@ class WindowApp < Gtk::Window
 	def validate
 		puts @login_entry.text
 		puts @password_entry.text
+		@password_entry.text = ""
 	end
 end
 
