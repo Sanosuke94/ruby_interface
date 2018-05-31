@@ -2,7 +2,6 @@
 # Première interface graphique
 # 20 mai 2018
 require 'gtk3'
-require_relative 'home'
 
 class WindowApp < Gtk::Window
 	
@@ -52,7 +51,26 @@ class WindowApp < Gtk::Window
 	def validate
 		puts @login_entry.text
 		puts @password_entry.text
-		@password_entry.text = ""
+		if @login_entry.text == "" || @password_entry.text == ""
+ 			alert_box
+		else
+			valid_box
+			@password_entry.text = ""
+			#@home.run
+		end
+		
+	end
+	
+	def alert_box
+			box = Gtk::MessageDialog.new(:parent => self, :flags => :destroy_with_parent, :type => :warning, :buttons_type => :ok, :message => "Remplissez tous les champs")
+			box.run
+			box.destroy
+	end
+	
+	def valid_box
+		box = Gtk::MessageDialog.new(:parent => self, :flags => :destroy_with_parent, :type => :info, :buttons_type => :ok, :message => "Bienvenue #{@login_entry.text}")
+		box.run
+		box.destroy
 	end
 end
 
